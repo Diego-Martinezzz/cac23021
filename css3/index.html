@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            box-sizing: border-box;
+            
+        }
+        p{
+            padding: 1px 2px 3px 4px;
+            background-color: peachpuff;
+            border: 1px solid black;
+            margin: 100px;
+            
+        }
+
+        .anav{
+            text-decoration: none;
+            font-size: 25px;
+            background-color: rgb(34, 216, 230);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+
+        }
+
+        nav{background-color: blueviolet;}
+
+        #estatico{
+            background-color: rgb(165, 48, 48);
+            width: 100px;
+            height: 100px;
+            position: static;
+        }
+
+        #fijo{
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+        }
+
+        #relativo{
+            background-color: rgb(184, 181, 36);
+            width: 100px;
+            height: 100px;
+            position: relative;
+            top: 90px;
+            left: 90px;
+
+        }
+
+        #absoluto{
+            background-color: coral;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 80px;
+            left: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="anav" href="">Home</a>
+        <a class="anav" href="">Nosotros</a>
+        <a class="anav" href="">Sucursales</a>
+    </nav>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos praesentium placeat vitae consectetur fugit consequuntur obcaecati eius saepe laudantium, facilis expedita, amet laborum, earum voluptate voluptates quos cumque dolores reprehenderit impedit distinctio accusamus! Inventore adipisci quae libero vitae.
+
+    </p>
+    <hr>
+    <div id="estatico"> rojo static 100x100</div>
+    <div id="fijo">azul fijo 100x100</div>
+    <div id="relativo">
+        <div id="absoluto"></div>
+    </div>
+
+
+</body>
+</html>

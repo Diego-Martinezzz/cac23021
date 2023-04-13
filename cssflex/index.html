@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .contenedor {
+            background-color: blue; 
+            height: 400px;
+            display: flex;
+            flex-flow: row wrap;    /*atajo*/
+
+            /*flex-direction: row;*/
+            /*row (por defecto) / column / row-reverse / column-reverse*/
+            /*flex-wrap: wrap;*/
+            /* nowrap (por defecto) / wrap */
+            justify-content: space-around;
+            /*alinea sobre eje principal */
+            /* flex-start(por defecto) / flex-end / center /space-around/space-between/space-evenly   */
+            align-items:center;
+            /* alinea sobre el eje secundario*/
+            /* flex-start / flex-end / center */
+        
+
+        }
+
+        .contenedor div {
+            background-color: rgb(182, 182, 210);
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            text-align: center;
+            font-size: 24px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+    </div>
+</body>
+
+</html>
