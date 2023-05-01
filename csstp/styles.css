@@ -1,0 +1,41 @@
+html{
+    font-family: 'Ubuntu', sans-serif;
+}
+body {
+    margin: 0;
+    background-color: rgb(245, 240, 235);
+}
+
+header {
+    background-color: rgb(103, 85, 32);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin: -10px;
+    
+}
+
+header h1 {
+    font-size: 2rem;
+    
+    display: inline-block;
+}
+
+.seccion{
+    width: 400px;
+    margin: 0 auto;
+}
+
+section article{
+    background-color: rgb(222, 222, 222);
+    margin: 1px 0;
+    border-radius: 10px;
+    padding: 1px 0;
+    
+}
+
+footer{
+    background-color: burlywood;
+    color: #fff;
+    padding: 2.5rem 2rem;
+}
