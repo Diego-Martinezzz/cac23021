@@ -1,9 +1,9 @@
 function getStats() {
   const steamId = document.getElementById("steam-id").value;
-  const apiKey = "DF49C4D882FE9530A497F7AFD86D196F";
-  const url = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${apiKey}&steamid=${steamId}`;
+  const apiKey = "ae941d3c-598a-4fde-9b58-766e999f9c72"; /* Tracker.gg apikey */
+  const url = `https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${steamId}?TRN-Api-Key=${apiKey}`;
   fetch(url, {
-    mode: 'cors'
+    mode: "cors",
   })
     .then(response => {
       if (response.ok) {
@@ -12,18 +12,54 @@ function getStats() {
         throw new Error("Error en la respuesta de la API");
       }
     })
-    .then(data => {
-      const stats = data.playerstats.stats;
-      const totalKills = stats.find(stat => stat.name === "total_kills").value;
-      const totalDeaths = stats.find(stat => stat.name === "total_deaths").value;
-      const totalRoundsPlayed = stats.find(stat => stat.name === "total_rounds_played").value;
-      const kdRatio = totalKills / totalDeaths;
-      const winPercentage = (stats.find(stat => stat.name === "total_wins").value / stats.find(stat => stat.name === "total_matches_played").value) * 100;
-      const html = `<p>Kills totales: ${totalKills}</p>
-                    <p>Muertes totales: ${totalDeaths}</p>
-                    <p>Rondas jugadas: ${totalRoundsPlayed}</p>
-                    <p>K/D ratio: ${kdRatio.toFixed(2)}</p>
-                    <p>Porcentaje de victorias: ${winPercentage.toFixed(2)}%</p>`;
+    .then((response) => {
+      const totalKills = response.data.segments[0].stats.kills.value;
+      const totalDeaths = response.data.segments[0].stats.deaths.value;
+      const totalRoundsPlayed = response.data.segments[0].stats.roundsPlayed.value;
+      const kdRatio = response.data.segments[0].stats.kd.value;
+      const winPercentage = response.data.segments[0].stats.wlPercentage.value;
+
+      const maxKills = 999999; // Valor máximo para las kills totales
+      const maxDeaths = 999999; // Valor máximo para las muertes totales 
+      const maxKDRatio = 100; // Valor máximo para las kills totales
+      const maxRounds = 999999; // Valor máximo para las muertes totales 
+
+      const html = `  <div id="stats">
+      <div class="stat-item">
+        <p>Kills totales: ${totalKills}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${calculatePercentage(totalKills, maxKills)}%"></div>
+        </div>
+      </div>
+  
+      <div class="stat-item">
+        <p>Muertes totales: ${totalDeaths}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${calculatePercentage(totalDeaths, maxDeaths)}%"></div>
+        </div>
+      </div>
+  
+      <div class="stat-item">
+        <p>Rondas jugadas: ${totalRoundsPlayed}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${calculatePercentage(totalRoundsPlayed, maxRounds)}%"></div>
+        </div>
+      </div>
+  
+      <div class="stat-item">
+        <p>K/D ratio: ${kdRatio.toFixed(2)}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${calculatePercentage(kdRatio, maxKDRatio)}%"></div>
+        </div>
+      </div>
+  
+      <div class="stat-item">
+        <p>Porcentaje de victorias: ${winPercentage.toFixed(2)}%</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: ${winPercentage}%"></div>
+        </div>
+      </div>
+    </div>`;
       document.getElementById("stats").innerHTML = html;
     })
     .catch(error => {

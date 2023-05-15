@@ -107,6 +107,7 @@ header {
   justify-content: center;
   position: relative;
   border-radius: 25px;
+  flex-direction: column;
 }
 
 .input-group-addon {
@@ -235,28 +236,76 @@ input[type="text"]::placeholder {
   margin-bottom: 40px;
 }
 
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 5px;
+}
+
+#form-contacto{
+  background-color: #333;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 650px;
+  margin: auto;
+  padding: 5px 35px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  display: block;
+}
+#form-contacto label, #form-contacto input{
+  color: #e88e08;
+
+  
+}
+
+input, textarea{
+  padding: 17px 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background-color: #eab86e;
+  outline: none;
+  border: #fffbfb;
+}
+
+
 /* Estilos para el formulario de contacto */
+
+/*
 #formulario {
   background-color: #f2f2f2;
   padding: 50px;
   text-align: center;
+  color: #333;
 }
 
 #formulario h2 {
   margin: 0;
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: #222;
 }
 
 #formulario form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #222;
 }
 
 #formulario label {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  color: #222;
 }
 
 #formulario input[type="text"],
@@ -288,7 +337,7 @@ input[type="text"]::placeholder {
 #formulario button[type="submit"]:hover {
   background-color: #444;
 }
-
+*/
 /* Estilos para el footer */
 footer {
   background-color: #222;

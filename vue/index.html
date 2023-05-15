@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="error">Se rompio</div>
+        <div><h1>{{message}}</h1>
+        <h2>{{nombre}}</h2>
+        <h3>{{apellido}}</h3>
+        <h1 v-text="nombre"></h1></div>
+        <img :src="imagen" alt="">
+        <button v-on:click="alert('Enviado')">Enviar</button>
+        <button v-on:click="alert('Enviado')">Enviar</button>
+        <div v-html="encabezado">encabezados</div>
+        
+        <ul>
+            <li v-for="elemento in frutas">{{elemento}}</li>
+        </ul>
+        <div>
+            <img v-for="elemento in fotos"  :src="elemento" alt="personaje">
+        </div>
+        
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../vue/js/main.js"></script>
+</body> 
+</html>
