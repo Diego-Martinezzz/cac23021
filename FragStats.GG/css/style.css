@@ -32,6 +32,11 @@ header {
   border-radius: 50%;
   display: flex;
 }
+
+.abrir-menu,
+.cerrar-menu{
+  display: none;
+}
 /* Estilo de la Nav Bar*/
 .nav-bar {
   display: flex;
@@ -40,7 +45,7 @@ header {
   padding: 0 32px;
   background-color: #24292e;
   color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .nav-bar ul {
@@ -63,7 +68,7 @@ header {
   left: 0;
   right: 0;
   height: 2px;
-  background-color: #FF9900;
+  background-color: #ff9900;
   transform: scaleX(0);
   transition: transform 0.2s ease-out;
 }
@@ -80,7 +85,7 @@ header {
 }
 
 .nav-bar a:hover {
-  color: #FF9900;
+  color: #ff9900;
 }
 
 /* Estilo de la barra de busqueda */
@@ -92,77 +97,65 @@ header {
   transition: opacity 0.2s ease-out;
 }
 
-
-.search-bar-form {
+.search-bar {
   display: flex;
-  align-items: center;
-  width: 900px;
-  position: relative; /* Agregado */
-}
-
-
-.input-group {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
-  border-radius: 25px;
-  flex-direction: column;
+  width: 35em;
 }
 
-.input-group-addon {
-  margin-right: 10px;
-  position: absolute; /* Agregado */
-  right: 0; /* Agregado */
+.search-bar .input-group {
+  display: flex;
+  align-items: center;
+  background-color: rgb(60, 63, 70);
+  border-radius: 19px;
+  padding: 0 10px;
+  width: 40rem;
+  height: 38px;
 }
 
-input[type="text"] {
-  border: none;
-  background-color: transparent;
-  color: white;
+.search-bar input[type="text"] {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
   font-size: 16px;
-  width: 100%;
-  padding-right: 30px; /* Agregado */
+  padding: 0 10px;
+}
+
+.search-bar input[type="text"]:focus {
   outline: none;
 }
 
-input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+.search-bar .input-group-addon {
+  margin-left: 10px;
+  color: #fff;
+  cursor: pointer;
 }
 
-.fa-search {
-  color: white;
-  font-size: 20px;
-  opacity: 0.5;
-  transition: opacity 0.2s ease-out;
-}
-
-.fa-search:hover {
-  opacity: 1;
+.search-bar .input-group-addon:hover {
+  color: #ccc;
 }
 
 /* Estilos para la sección de presentación */
 
 .home-outer {
-  background: url('/images/cs-background.png') no-repeat center center fixed;
+  background: url("/images/cs-background.png") no-repeat center center fixed;
   background-size: cover;
   background-image: url(../img/banners/m4a4howl.jpg);
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: start;
-
 }
 
-
 .home-outer h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 40px;
   margin: 0;
   margin-bottom: 20px;
   color: #fff;
   font-weight: 700;
-
 }
 
 .home-outer p {
@@ -171,12 +164,12 @@ input[type="text"]::placeholder {
   margin: 0;
   margin-bottom: 20px;
   color: #fff;
-
 }
 
 .home-outer .boton-principal {
-  display: inline-block;
+  display: block;
   padding: 1rem 2rem;
+  width: 300px;
   background-color: #dd9e37;
   color: #fff;
   font-size: 1.1rem;
@@ -185,12 +178,12 @@ input[type="text"]::placeholder {
   border-radius: 5px;
   text-decoration: none;
   margin-top: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 10px;
   transition: all 0.4s ease;
 }
 
 .home-outer .boton-principal:hover {
-  box-shadow: 0 0 5px 0 rgba(255,255,255,0.5);
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
   text-decoration: none;
 }
 
@@ -200,7 +193,7 @@ input[type="text"]::placeholder {
   padding-right: 15px;
 }
 
-  .home-main {
+.home-main {
   color: #fff;
   padding: 16px 86px 146px;
   justify-content: start;
@@ -216,7 +209,6 @@ input[type="text"]::placeholder {
 .home-main .home-info {
   font-size: 16px;
   padding-bottom: 16px;
-
 }
 /* Estilos para la sección de estadísticas */
 #estadisticas {
@@ -249,95 +241,143 @@ input[type="text"]::placeholder {
   border-radius: 5px;
 }
 
-#form-contacto{
+/* Estilos para equipos */
+
+#equipos {
   background-color: #333;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 650px;
-  margin: auto;
-  padding: 5px 35px;
-  margin-top: 30px;
-  padding-bottom: 30px;
-  border-radius: 20px;
-  font-size: 16px;
-  display: block;
-}
-#form-contacto label, #form-contacto input{
-  color: #e88e08;
-
-  
-}
-
-input, textarea{
-  padding: 17px 25px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  background-color: #eab86e;
-  outline: none;
-  border: #fffbfb;
-}
-
-
-/* Estilos para el formulario de contacto */
-
-/*
-#formulario {
-  background-color: #f2f2f2;
+  color: #fff;
   padding: 50px;
   text-align: center;
-  color: #333;
 }
 
-#formulario h2 {
-  margin: 0;
-  font-size: 2.5rem;
+#title_equipos img,
+#title_equipos h2 {
+  display: inline-block;
+  text-align: center;
+}
+#title_equipos img {
+  float: left;
+  width: 150px;
+  margin-right: 10px;
+}
+
+#button_equipos {
+  background-color: #dd9e37;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 200px;
+  height: 30px;
+}
+#button_equipos:hover {
+  background-color: white;
+  color: black;
+}
+
+#tabla-competiciones {
+  font-family: "Open Sans", sans-serif;
+  font-size: small;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+#tabla-competiciones td,
+#tabla-competiciones th {
+  border: 1px solid #fff;
+  padding: 8px;
+  width: 33.33%;
+  text-align: center;
+}
+
+#tabla-competiciones tr:nth-child(even) {
+  background-color: rgb(163, 153, 153);
+}
+
+#tabla-competiciones tr:hover {
+  background-color: rgb(0, 255, 0);
+}
+
+#tabla-competiciones th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  background-color: #dd9e37;
+  color: black;
+}
+
+/* Estilos para el formulario de contacto */
+.formulary {
+  background-color: #24292e;
+  color: #fff;
+  padding: 20px;
+  display: block;
+}
+
+.formulary h2 {
+  text-align: center;
+  font-size: 24px;
   margin-bottom: 20px;
-  color: #222;
 }
 
-#formulario form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #222;
+.formulary .contenedor {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-#formulario label {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: #222;
+.formulary label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
-#formulario input[type="text"],
-#formulario input[type="email"],
-#formulario textarea {
+.formulary input,
+.formulary textarea {
   width: 100%;
   padding: 10px;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  border-radius: 5px;
+  font-size: 16px;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-#formulario textarea {
+.formulary textarea {
   height: 150px;
 }
 
-#formulario button[type="submit"] {
-  background-color: #222;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
+.formulary .boton-principal {
+  width: 179px;
+  height: 50px;
+  text-align: center;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  background-color: #dd9e37;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
 }
 
-#formulario button[type="submit"]:hover {
-  background-color: #444;
+.formulary input[type="submit"]:hover,
+.formulary button:hover {
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+  text-decoration: none;
 }
-*/
+
+.formulary span {
+  color: red;
+}
+
 /* Estilos para el footer */
 footer {
   background-color: #222;
