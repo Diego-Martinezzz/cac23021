@@ -238,6 +238,7 @@ input#search-bar:-webkit-autofill {
 .modal-login-container input[type="password"] {
   width: 100%;
   font-size: 26px;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
@@ -249,6 +250,7 @@ input#search-bar:-webkit-autofill {
   border-radius: 5px;
   border-color: #dd9e37;
   border: 2px;
+  box-shadow: 0 0 0 1px #dd9e37;
   background-color: #dd9e37;
   font-size: 14px;
   font-weight: bold;

@@ -3,19 +3,21 @@ new Vue({
   data: {
     correo: "",
     contrasena: "",
-    usuario: ""
+    usuario: "",
   },
   methods: {
     iniciarSesion() {
       fetch("http://plasmads.pythonanywhere.com/cuentas")
         .then((response) => response.json())
         .then((data) => {
-          const objetoEncontrado = data.find((objeto) => objeto.correo === this.correo);
+          const objetoEncontrado = data.find(
+            (objeto) => objeto.correo === this.correo
+          );
 
           if (objetoEncontrado) {
             if (objetoEncontrado.contrasena === this.contrasena) {
+              localStorage.setItem("id", `${objetoEncontrado.id}`);
               alert("Inicio de sesión correcto");
-              this.usuario = this.correo;
             } else {
               alert("Contraseña incorrecta");
             }
@@ -29,6 +31,6 @@ new Vue({
     },
     closeModal(modalId) {
       // Implementa la función para cerrar el modal
-    }
-  }
+    },
+  },
 });
