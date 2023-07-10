@@ -14,9 +14,9 @@ function cerrarMenuHamburguesa() {
 }
 
 // Función para mantener el nav visible
-function minWidth(){
-  if (query.matches){
-    document.querySelector('nav').style.display = "block";
+function minWidth() {
+  if (query.matches) {
+    document.querySelector("nav").style.display = "block";
   }
 }
 // Asignar eventos a los botones
@@ -24,13 +24,14 @@ abrirMenu.addEventListener("click", abrirMenuHamburguesa);
 cerrarMenu.addEventListener("click", cerrarMenuHamburguesa);
 
 // Mantener la nav-bar visible
-const navbar = document.querySelector('#nav');
+const navbar = document.querySelector("#nav");
 
 function setNavbarDisplay() {
-  if (window.innerWidth < 768) { // Navbar debería estar escondida en tamaños más chicos
-    navbar.style.display = 'none';
+  if (window.innerWidth < 768) {
+    // Navbar debería estar escondida en tamaños más chicos
+    navbar.style.display = "none";
   } else {
-    navbar.style.display = 'block';
+    navbar.style.display = "block";
   }
 }
 
@@ -38,6 +39,21 @@ function setNavbarDisplay() {
 setNavbarDisplay();
 
 // Event listener al cambiar el tamaño de pantalla
-window.addEventListener('resize', setNavbarDisplay);
+window.addEventListener("resize", setNavbarDisplay);
 
-
+// Cambiar placeholder de searchbar en media <= 480
+function cambiarPlaceholder() {
+  let input = document.getElementById("search-bar");
+  input.placeholder = "Buscar Jugador";
+}
+var mediaQuery = window.matchMedia("(max-width: 480px)");
+// Ejecutar la función inicialmente si la media query se cumple
+if (mediaQuery.matches) {
+  cambiarPlaceholder();
+}
+// Agregar el listener del cambio de media query
+mediaQuery.addEventListener("change", function (event) {
+  if (event.matches) {
+    cambiarPlaceholder();
+  }
+});

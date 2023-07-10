@@ -1,56 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="Shortcut icon" href="./img/icons/Templatelogo.png" />
-    <title>FragStats.GG - El sitio de estadisticas de CS:GO mas completo</title>
-    <!-- archivos CSS -->
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/responsive.css" />
-    <!-- las fuentes de Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Lato&family=Roboto&display=swap"
-      rel="stylesheet" />
-    <!-- FontAwesome -->
-    <script
-      src="https://kit.fontawesome.com/c2239edec8.js"
-      crossorigin="anonymous"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="Shortcut icon" href="./img/icons/Templatelogo.png" />
+  <title>FragStats.GG - El sitio de estadisticas de CS:GO mas completo</title>
+  <!-- archivos CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/responsive.css" />
+  <!-- las fuentes de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Lato&family=Roboto&display=swap" rel="stylesheet" />
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/c2239edec8.js" crossorigin="anonymous"></script>
+  <!-- emailjs -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="Nav-Design">
+      <div class="logo">
+        <img src="img/icons/MainIcon.png" alt="MainIcon" /><a href="#"></a>
+      </div>
+      <div class="nav-bar" id="inicio">
+        <div class="search-bar">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i id="lupa" class="fa fa-search"></i>
+            </span>
+            <input type="text" id="search-bar" placeholder="Buscar Jugador (SteamID64)" />
+          </div>
+          <i id="abrir" class="fa-solid fa-bars fa-xl" style="color: #dd9e37"></i>
+        </div>
+        <div id="nav" class="nav-tools">
+          <ul class="nav-items">
+            <i id="cerrar" class="fa-solid fa-bars fa-xl" style="color: #dd9e37"></i>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#estadisticas">Estadísticas</a></li>
+            <li><a href="#equipos">Equipos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#" onclick="openModal('register-modal')">Registrarte</a></li>
+            <li><a href="#" onclick="openModal('login-modal')">Iniciar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+    <!-- Modals -->
+    <!-- Modal de registro -->
+    <div id="register-modal" class="modal">
+      <div class="modal-content" id="app">
+        <form>
+        <span class="close" onclick="closeModal('register-modal')">&times;</span>
+        <div class="modal-register-container">
+          <h2>Registrarte</h2>
+          <div class="mb-3">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" v-model="nombre" />
+          </div>
+          <div class="mb-3">
+            <label for="correo">Correo</label>
+            <input type="text" name="correo" id="correo" v-model="correo" />
+          </div>
+          <div class="mb-3">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" name="contrasena" id="contrasena" v-model="contrasena"/>
+          </div>
+            <button type="button" v-on:click="grabar()">Registrarte</button>
+          </div>
+        </form>
+      </div>
 
-  <body>
-    <header>
-      <nav class="Nav-Design">
-        <div class="logo">
-          <img src="img/icons/MainIcon.png" alt="MainIcon" /><a href="#"></a>
+    </div>
+
+<!-- Modal de inicio de sesión -->
+<div id="login-modal" class="modal">
+  <div class="modal-content">
+    <form @submit="iniciarSesion">
+      <span class="close" @click="closeModal('login-modal')">&times;</span>
+      <div class="modal-login-container">
+        <h2>Iniciar sesión</h2>
+        <div class="mb-3">
+          <label for="correo-login">Correo</label>
+          <input type="text" v-model="correo" name="correo-login" id="correo-login" />
         </div>
-        
-        <div class="nav-bar" id="inicio">
-          <div class="search-bar">
-            <div class="input-group">
-              <span class="input-group-addon"
-                ><i id="lupa" class="fa fa-search"></i
-              ></span>
-              <input
-                type="text"
-                id="search-bar"
-                placeholder="Buscar Jugador (SteamID64)" />
-            </div>
-            <button id="abrir" class="abrir-menu">Abrir</button>
-          </div>
-          <div id="nav" class="nav-tools">
-            <ul class="nav-items">
-              <button id="cerrar" class="cerrar-menu">Cerrar</button>
-              <li><a href="#inicio">Inicio</a></li>
-              <li><a href="#estadisticas">Estadísticas</a></li>
-              <li><a href="#equipos">Equipos</a></li>
-              <li><a href="#contacto">Contacto</a></li>
-            </ul>
-          </div>
-          
+        <div class="mb-3">
+          <label for="contrasena-login">Contraseña</label>
+          <input type="password" v-model="contrasena" name="contrasena-login" id="contrasena-login" />
         </div>
-      </nav>
-    </header>
+        <button type="submit">Iniciar sesión</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
     <main>
       <section
         class="home-outer"
@@ -105,7 +148,6 @@
           </div>
         </div>
       </section>
-
       <section id="estadisticas">
         <h2>Estadísticas</h2>
         <p>
@@ -113,14 +155,11 @@
           jugadores y equipos de CS:GO.
         </p>
         <div id="loading" style="display: none">Cargando...</div>
-
         <input type="text" id="steam-id" style="color: black" />
-        <button onclick="getStats(`#steam-id`)">Obtener estadísticas</button>
-
-        <div id="stats"></div>
-
-        <!-- código HTML para mostrar las estadísticas -->
+        <button onclick="getStats('#steam-id')">Obtener estadísticas</button>
+        <div class="stats-container" id="stats"></div>
       </section>
+
       <section id="equipos">
         <div id="title_equipos">
           <img id="podio" src="./img/icons/podium.png" alt="" />
@@ -156,50 +195,69 @@
           formulario:
         </h2>
         <div class="contenedor">
-          <label for="name">Nombre<span> *</span></label>
-          <input
-            name="name"
-            required
-            type="text"
-            id="name"
-            placeholder="Nombre" />
-
-          <label for="email">Email<span> *</span></label>
-          <input
-            name="email"
-            type="text"
-            id="email"
-            required
-            placeholder="Email" />
-
-          <label for="message">Mensaje<span> *</span></label>
-          <br />
-          <br />
-          <br />
-
-          <textarea
-            name="message"
-            id="message"
-            cols="80"
-            rows="10"
-            placeholder="Mensaje"></textarea>
-
-          <button class="boton-principal" type="submit">Enviar</button>
+          <form id="myForm" method="POST">
+            <label for="name">Nombre<span> *</span></label>
+            <input
+              name="name"
+              required=""
+              type="text"
+              id="name"
+              placeholder="Nombre" />
+            <p id="errorName"></p>
+            <label for="email">Email<span> *</span></label>
+            <input
+              name="email"
+              type="text"
+              id="email"
+              required=""
+              placeholder="Email" />
+            <p id="errorEmail"></p>
+            <label for="message">Mensaje<span> *</span></label>
+            <textarea
+              name="message"
+              id="message"
+              cols="80"
+              rows="10"
+              placeholder="Mensaje"
+              data-dl-input-translation="true"></textarea>
+            <div class="button-container">
+              <button class="boton-principal" type="submit">Enviar</button>
+            </div>
+            <deepl-inline-translate
+              style="z-index: 1999999999"></deepl-inline-translate>
+          </form>
         </div>
       </section>
     </main>
     <footer>
       <p>&copy; FragStat.gg - Todos los derechos reservados</p>
     </footer>
+      <!-- Script para controlar los modales -->
+  <script>
+    function openModal(modalId) {
+      var modal = document.getElementById(modalId);
+      modal.style.display = "block";
+    }
+
+    function closeModal(modalId) {
+      var modal = document.getElementById(modalId);
+      modal.style.display = "none";
+    }
+  </script>
     <!-- Script consumen las APIs -->
     <script src="./js/steamwebapi.js"></script>
     <script src="./js/equipos.js"></script>
     <script>
       (function () {
-        emailjs.init("API_Key(Public_Key)");
+        emailjs.init("vRapqWfeqz267UvmH"); //API_Key(Public_Key)
+        emailjs.init("vRapqWfeqz267UvmH"); //API_Key(Public_Key)
       })();
     </script>
     <script src="./js/form-validation.js"></script>
     <script src="./js/responsive.js"></script>
+  <!-- <script src="./js/main.js"></script> -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/crear_cuenta.js"></script>
+  <script src="./js/iniciar_sesion.js"></script>
   </body>
 </html>

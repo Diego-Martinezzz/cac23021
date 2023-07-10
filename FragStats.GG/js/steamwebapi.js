@@ -2,9 +2,10 @@ function getStats(input) {
   const steamId = document.querySelector(input).value;
   const apiKey = "ae941d3c-598a-4fde-9b58-766e999f9c72"; /* Tracker.gg apikey */
   const url = `https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${steamId}?TRN-Api-Key=${apiKey}`;
-  fetch(url, {
-    mode: "cors",
-  })
+
+  console.log(steamId);
+
+  fetch(url, { mode: "cors" })
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -13,67 +14,72 @@ function getStats(input) {
       }
     })
     .then((response) => {
-      const totalKills = response.data.segments[0].stats.kills.value;
-      const totalDeaths = response.data.segments[0].stats.deaths.value;
-      const totalRoundsPlayed =
-        response.data.segments[0].stats.roundsPlayed.value;
-      const kdRatio = response.data.segments[0].stats.kd.value;
-      const winPercentage = response.data.segments[0].stats.wlPercentage.value;
+      const statsContainer = document.getElementById("stats");
+      statsContainer.innerHTML = "";
+      const stats = response.data.segments[0].stats;
+      const statsKeys = Object.keys(stats);
 
-      const maxKills = 999999; // Valor máximo para las kills totales
-      const maxDeaths = 999999; // Valor máximo para las muertes totales
-      const maxKDRatio = 100; // Valor máximo para las kills totales
-      const maxRounds = 999999; // Valor máximo para las muertes totales
+      // Obtener la foto del jugador
+      const avatarUrl = response.data.platformInfo.avatarUrl;
 
-      const html = `  <div id="stats">
-      <div class="stat-item">
-        <p>Kills totales: ${totalKills}</p>
-        <div class="progress-bar">
-          <div class="progress" style="width: ${calculatePercentage(
-            totalKills,
-            maxKills
-          )}%"></div>
-        </div>
-      </div>
-  
-      <div class="stat-item">
-        <p>Muertes totales: ${totalDeaths}</p>
-        <div class="progress-bar">
-          <div class="progress" style="width: ${calculatePercentage(
-            totalDeaths,
-            maxDeaths
-          )}%"></div>
-        </div>
-      </div>
-  
-      <div class="stat-item">
-        <p>Rondas jugadas: ${totalRoundsPlayed}</p>
-        <div class="progress-bar">
-          <div class="progress" style="width: ${calculatePercentage(
-            totalRoundsPlayed,
-            maxRounds
-          )}%"></div>
-        </div>
-      </div>
-  
-      <div class="stat-item">
-        <p>K/D ratio: ${kdRatio.toFixed(2)}</p>
-        <div class="progress-bar">
-          <div class="progress" style="width: ${calculatePercentage(
-            kdRatio,
-            maxKDRatio
-          )}%"></div>
-        </div>
-      </div>
-  
-      <div class="stat-item">
-        <p>Porcentaje de victorias: ${winPercentage.toFixed(2)}%</p>
-        <div class="progress-bar">
-          <div class="progress" style="width: ${winPercentage}%"></div>
-        </div>
-      </div>
-    </div>`;
-      document.getElementById("stats").innerHTML = html;
+      // Crear el elemento de la foto del jugador
+      const avatarImage = document.createElement("img");
+      avatarImage.src = avatarUrl;
+      avatarImage.alt = "Foto del jugador";
+      avatarImage.className = "avatar-image";
+
+      // Agregar la foto del jugador al contenedor de estadísticas
+      statsContainer.appendChild(avatarImage);
+
+      statsKeys.forEach((statKey) => {
+        const statValue = stats[statKey].value;
+        const statMaxValue = stats[statKey].maxValue;
+        const progressPercentage = (statValue / statMaxValue) * 100;
+
+        // Crear el elemento de la barra de progreso circular
+        const circularProgress = document.createElement("div");
+        circularProgress.className = "circular-progress";
+
+        // Crear el elemento de la barra de progreso
+        const progress = document.createElement("div");
+        progress.className = "progress";
+        progress.style.transform = `rotate(0deg)`;
+
+        // Crear el elemento del valor de progreso
+        const progressValue = document.createElement("span");
+        progressValue.className = "progress-value";
+        progressValue.textContent = "0%";
+
+        // Agregar los elementos de la barra de progreso al contenedor
+        circularProgress.appendChild(progress);
+        circularProgress.appendChild(progressValue);
+
+        // Crear el elemento del ítem de estadística
+        const statItem = document.createElement("div");
+        statItem.className = "stat-item";
+        statItem.innerHTML = `<p class="stat-label">${stats[statKey].displayName}: ${statValue}</p>`;
+
+        // Agregar la barra de progreso al ítem de estadística
+        statItem.appendChild(circularProgress);
+
+        // Agregar el ítem de estadística al contenedor de estadísticas
+        statsContainer.appendChild(statItem);
+
+        // Animar la barra de progreso
+        const maxRotation = 360; // Máximo de rotación en grados
+
+        setTimeout(() => {
+          const rotationAmount = progressPercentage * (maxRotation / 100); // Cálculo de la cantidad de rotación
+          progress.style.transform = `rotate(${rotationAmount}deg)`;
+          progressValue.textContent = `${progressPercentage.toFixed(0)}%`;
+
+          const progressFill = document.createElement("div");
+          progressFill.className = "progress-fill";
+          progressFill.style.transform = `rotate(${rotationAmount}deg)`;
+
+          progress.appendChild(progressFill);
+        }, 100);
+      });
     })
     .catch((error) => {
       console.error(error);
@@ -82,12 +88,9 @@ function getStats(input) {
     });
 }
 
-function calculatePercentage(value, max) {
-  return (value / max) * 100;
-}
-
 const input = document.querySelector("#search-bar");
 const estadisticas = document.getElementById("estadisticas");
+
 input.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -100,8 +103,8 @@ input.addEventListener("keypress", function (event) {
 
 const lupa = document.querySelector("#lupa");
 lupa.addEventListener("click", () => {
-  getStats("#search-bar");
+  getStats("#steam-id");
   setTimeout(function () {
     estadisticas.scrollIntoView({ behavior: "smooth" });
-  }, 1000);
+  }, 100);
 });
