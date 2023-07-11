@@ -1,19 +1,17 @@
-const { createApp } = Vue;
-createApp({
-  data() {
-    return {
-      cuentas: [],
-      //url:'http://localhost:5000/cuentas',
-      // si el backend esta corriendo local  usar localhost 5000(si no lo subieron a pythonanywhere)
-      url: "http://plasmads.pythonanywhere.com/cuentas", // si ya lo subieron a pythonanywhere
-      error: false,
-      cargando: true,
-      /*atributos para el guardar los valores del formulario */
-      id: 0,
-      nombre: "",
-      correo: "",
-      contrasena: "",
-    };
+new Vue({
+  el: "#register-modal",
+  data: {
+    cuentas: [],
+    //url:'http://localhost:5000/cuentas',
+    // si el backend esta corriendo local  usar localhost 5000(si no lo subieron a pythonanywhere)
+    url: "http://plasmads.pythonanywhere.com/cuentas", // si ya lo subieron a pythonanywhere
+    error: false,
+    cargando: true,
+    /*atributos para el guardar los valores del formulario */
+    id: 0,
+    nombre: "",
+    correo: "",
+    contrasena: "",
   },
   methods: {
     fetchData(url) {
@@ -45,6 +43,7 @@ createApp({
         nombre: this.nombre,
         correo: this.correo,
         contrasena: this.contrasena,
+        favoritos: null,
       };
       var options = {
         body: JSON.stringify(cuenta),
@@ -54,8 +53,11 @@ createApp({
       };
       fetch(this.url, options)
         .then(function () {
+          document.querySelector(".registrado").style.display = "none";
+          document.querySelector(".iniciado").style.display = "none";
+          document.querySelector("#cerrarSesion").style.display = "inline";
+          closeModal("register-modal");
           alert("Registro grabado");
-          window.location.href = "http://plasmads.pythonanywhere.com/cuentas"; // recarga cuentas.html
         })
         .catch((err) => {
           console.error(err);
@@ -66,4 +68,4 @@ createApp({
   created() {
     this.fetchData(this.url);
   },
-}).mount("#app");
+});
