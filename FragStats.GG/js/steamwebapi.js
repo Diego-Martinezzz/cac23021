@@ -1,9 +1,6 @@
-function getStats(input) {
-  const steamId = document.querySelector(input).value;
+function getStats(steamId) {
   const apiKey = "ae941d3c-598a-4fde-9b58-766e999f9c72"; /* Tracker.gg apikey */
   const url = `https://cors-anywhere.herokuapp.com/https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${steamId}?TRN-Api-Key=${apiKey}`;
-
-  console.log(steamId);
 
   fetch(url, { mode: "cors" })
     .then((response) => {
@@ -43,7 +40,6 @@ function getStats(input) {
         // Crear el elemento de la barra de progreso
         const progress = document.createElement("div");
         progress.className = "progress";
-        progress.style.transform = `rotate(0deg)`;
 
         // Crear el elemento del valor de progreso
         const progressValue = document.createElement("span");
@@ -91,19 +87,9 @@ function getStats(input) {
 const input = document.querySelector("#search-bar");
 const estadisticas = document.getElementById("estadisticas");
 
-input.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    getStats("#search-bar");
-    setTimeout(function () {
-      estadisticas.scrollIntoView({ behavior: "smooth" });
-    }, 1000);
-  }
-});
-
 const lupa = document.querySelector("#lupa");
 lupa.addEventListener("click", () => {
-  getStats("#steam-id");
+  getStats(document.getElementById("search-bar").value);
   setTimeout(function () {
     estadisticas.scrollIntoView({ behavior: "smooth" });
   }, 100);

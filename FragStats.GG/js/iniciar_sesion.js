@@ -7,18 +7,18 @@ new Vue({
   },
   methods: {
     iniciarSesion() {
-      fetch("http://plasmads.pythonanywhere.com/cuentas")
+      fetch("https://plasmads.pythonanywhere.com/cuentas")
         .then((response) => response.json())
         .then((data) => {
           const objetoEncontrado = data.find(
             (objeto) => objeto.correo === this.correo
           );
-          console.log("1");
           if (objetoEncontrado) {
             if (objetoEncontrado.contrasena === this.contrasena) {
-              localStorage.setItem("id", `${objetoEncontrado.id}`);
+              localStorage.setItem("id", objetoEncontrado.id);
               document.querySelector(".registrado").style.display = "none";
               document.querySelector(".iniciado").style.display = "none";
+              document.querySelector("#miCuenta").style.display = "inline";
               document.querySelector("#cerrarSesion").style.display = "inline";
               closeModal("login-modal");
               alert("Inicio de sesión correcto");
@@ -41,15 +41,20 @@ new Vue({
 
 // Ocultar registro y login y mostrar cerrar sesión cuando se está logueado
 window.addEventListener("load", function () {
-  if (localStorage.getItem("id") !== "") {
+  if (
+    localStorage.getItem("id") !== "" &&
+    localStorage.getItem("id") !== null
+  ) {
     document.querySelector(".registrado").style.display = "none";
     document.querySelector(".iniciado").style.display = "none";
+    document.querySelector("#miCuenta").style.display = "inline";
     document.querySelector("#cerrarSesion").style.display = "inline";
   }
 });
 
 function cerrarSesion() {
   localStorage.setItem("id", "");
+  document.querySelector("#miCuenta").style.display = "none";
   document.querySelector("#cerrarSesion").style.display = "none";
   document.querySelector(".registrado").style.display = "inline";
   document.querySelector(".iniciado").style.display = "inline";

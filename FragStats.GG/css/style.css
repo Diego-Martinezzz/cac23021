@@ -51,6 +51,8 @@ header {
   display: flex;
   margin: 0;
   padding: 0;
+  justify-content: start;
+  align-items: start;
 }
 
 .nav-bar li {
@@ -99,6 +101,7 @@ header {
   display: flex;
   justify-content: center;
   width: 35em;
+  align-items: center;
 }
 
 .search-bar .input-group {
@@ -138,6 +141,41 @@ input#search-bar:-webkit-autofill {
 
 .search-bar .input-group-addon:hover {
   color: #ccc;
+}
+
+div#recent-searches {
+  position: absolute;
+  top: 60px;
+  width: 40rem;
+  text-align: initial;
+  list-style-type: none;
+  background: rgb(60, 63, 70);
+  padding: 3px 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, .9);
+}
+
+.fa-svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8em;
+  height: 1.8em;
+}
+
+.fa-svg svg {
+  width: 100%;
+  height: 100%;
+  fill: #dd9e37;
+  transition: transform 0.7s ease;
+}
+
+.fa-svg.open svg {
+  transform: rotate(360deg);
+}
+
+.fa-svg.close svg {
+  transform: rotate(-360deg);
 }
 
 /* Estilos para el modal */
@@ -267,7 +305,7 @@ input#search-bar:-webkit-autofill {
 
 /*Estilos para modificar cuentas*/
 
-.container{
+.container {
   background: url(../img/banners/M4a4howl.jpg);
   display: flex;
   justify-content: center;
@@ -276,11 +314,14 @@ input#search-bar:-webkit-autofill {
   min-width: 100%;
   color: #ededed;
   margin: -10px auto;
-  font-size:medium; 
+  font-size: medium;
   padding: 10px;
 }
 
-.container #id, #nombre, #correo, #contrasena{
+.container #id,
+#nombre,
+#correo,
+#contrasena {
   border-radius: 20px;
   background-color: #e8e6eb;
   color: #000000;
@@ -291,7 +332,7 @@ input#search-bar:-webkit-autofill {
   border-color: #dd9e37;
 }
 
-#wrapper{
+#wrapper {
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -303,13 +344,13 @@ input#search-bar:-webkit-autofill {
   align-items: center;
 }
 
-.container h2{
+.container h2 {
   font-size: 1.65rem;
   font-family: "Open Sans", sans-serif;
 }
 
-#btn-modify{
-  font-size:large;
+#btn-modify {
+  font-size: large;
   padding: 5px;
   margin-top: 15px;
   border-radius: 20px;
@@ -319,8 +360,6 @@ input#search-bar:-webkit-autofill {
   border-style: outset;
   border-color: #dd9e37;
 }
-
-
 
 /* Estilos para la sección de presentación */
 
@@ -396,9 +435,58 @@ input#search-bar:-webkit-autofill {
 }
 /* Estilos para la sección de estadísticas */
 #estadisticas {
-  background-color: #fff;
+  color: #fff;
+  background-color: #24292e;
   padding: 50px;
   text-align: center;
+}
+
+.input-stats {
+  background-color: rgb(60, 63, 70);
+  border-radius: 4px;
+  width: 40rem;
+  height: 38px;
+  padding: 0 10px;
+  color: #fff;
+}
+
+input#input-stats:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(60, 63, 70) inset;
+  -webkit-text-fill-color: #fff;
+}
+
+.input-stats input[type="text"] {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.input-stats input[type="text"]:focus {
+  outline: none;
+}
+
+.button-stats {
+  padding: 1rem 1rem;
+  width: 200px;
+  background-color: #dd9e37;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 2rem;
+  margin-bottom: 10px;
+  transition: all 0.4s ease;
+}
+
+.button-stats:hover {
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+  text-decoration: none;
 }
 
 .stats-container {
@@ -435,8 +523,8 @@ input#search-bar:-webkit-autofill {
   height: 100%;
   width: 100%;
   background-color: #ff9900;
-  transform-origin: 0 50%;
-  transform: rotate(0deg);
+  transform-origin: 50% 100%; /* Actualizado */
+  transform: rotate(0.1turn); /* Actualizado */
   border-radius: 50%;
   transition: transform 0.5s ease;
 }
@@ -490,13 +578,10 @@ input#search-bar:-webkit-autofill {
 
 #title_equipos img,
 #title_equipos h2 {
-  display: inline-block;
   text-align: center;
 }
 #title_equipos img {
-  float: left;
   width: 150px;
-  margin-right: 10px;
 }
 
 #button_equipos {

@@ -4,7 +4,7 @@ new Vue({
     cuentas: [],
     //url:'http://localhost:5000/cuentas',
     // si el backend esta corriendo local  usar localhost 5000(si no lo subieron a pythonanywhere)
-    url: "http://plasmads.pythonanywhere.com/cuentas", // si ya lo subieron a pythonanywhere
+    url: "https://plasmads.pythonanywhere.com/cuentas", // si ya lo subieron a pythonanywhere
     error: false,
     cargando: true,
     /*atributos para el guardar los valores del formulario */
@@ -52,16 +52,19 @@ new Vue({
         redirect: "follow",
       };
       fetch(this.url, options)
-        .then(function () {
+        .then((response) => response.json())
+        .then((data) => {
           document.querySelector(".registrado").style.display = "none";
           document.querySelector(".iniciado").style.display = "none";
+          document.querySelector("#miCuenta").style.display = "inline";
           document.querySelector("#cerrarSesion").style.display = "inline";
+          localStorage.setItem("id", data.id);
           closeModal("register-modal");
           alert("Registro grabado");
         })
         .catch((err) => {
           console.error(err);
-          alert("Error al Grabar"); // puedo mostrar el error tambien
+          alert("Error al Grabar"); // puedes mostrar el error también
         });
     },
   },
